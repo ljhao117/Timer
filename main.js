@@ -11,12 +11,17 @@ let onGoing = null;
 
 // begin button listener event
 document.getElementById("beginButton").addEventListener("click", function() {
-    console.log("clicked");
+
     if (onGoing !== null) {
         return;
     }
     interID = setInterval(function(){
-        seconds++;
+        console.log("mileSec = " + mileSec);
+        seconds += 1;
+        // if (mileSec === 1000) {
+        //     mileSec = 0;
+        //     seconds++
+        // }
         if (seconds === 60) {
             seconds = 0;
             minutes++;
@@ -28,7 +33,8 @@ document.getElementById("beginButton").addEventListener("click", function() {
 
         document.getElementById("timer").innerHTML = (Array(2).join(0) + hours).slice(-2) + ":" + 
                                                      (Array(2).join(0) + minutes).slice(-2) + ":" + 
-                                                     (Array(2).join(0) + seconds).slice(-2);
+                                                     (Array(2).join(0) + seconds).slice(-2)/* + "." +
+                                                     (Array(2).join(0) + mileSec).slice(-2)*/;
     
     }, 1000);
     onGoing = 1;
