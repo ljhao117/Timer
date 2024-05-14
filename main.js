@@ -1,5 +1,4 @@
 let beginButton = document.getElementById('beginButton');
-let stopButton = document.getElementById('stopBUtton');
 let resetButton = document.getElementById('resetButton');
 
 let mileSec = 0;
@@ -13,10 +12,16 @@ let onGoing = null;
 document.getElementById("beginButton").addEventListener("click", function() {
 
     if (onGoing !== null) {
+        document.getElementById("beginButton").innerHTML = "begin";
+        clearInterval(interID);
+        onGoing = null;
+    console.log("interID= " + interID);
         return;
     }
+    document.getElementById("beginButton").innerHTML = "stop";
+    
     interID = setInterval(function(){
-        console.log("mileSec = " + mileSec);
+        // console.log("mileSec = " + mileSec);
         seconds += 1;
         // if (mileSec === 1000) {
         //     mileSec = 0;
@@ -40,15 +45,11 @@ document.getElementById("beginButton").addEventListener("click", function() {
     onGoing = 1;
 });
 
-// stop listener event
-document.getElementById("stopButton").addEventListener("click", function() {
-    clearInterval(interID);
-    onGoing = null;
-});
-
 // reset listener event
 document.getElementById("resetButton").addEventListener("click", function () {
     clearInterval(interID);
+    document.getElementById("beginButton").innerHTML = "begin";
+    // console.log("interID= " + interID);
     mileSec = seconds = minutes = hours = 0;
     document.getElementById("timer").innerHTML = "00:00:00";
     onGoing = null;
