@@ -2,7 +2,7 @@ p {
     font-size: 24px;
     font-weight: bold;
     text-align: center;
-    padding: 10px;
+    padding: 5px;
     background-color: #f5f5f5;
 }
 
@@ -12,10 +12,15 @@ div {
 }
 
 button {
-    font-size: 60px;
+    font-size: 30px;
     
 }
 
 h1 {
     text-align: center;
+    color: bisque;
+}
+
+body {
+    background-color: black;
 }
