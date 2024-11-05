@@ -9,27 +9,26 @@ var intervalAlert = 0, timer = 10;
 
 function numberClicker() {
     counterError.addEventListener("click", function () {
-       numerator = numerator + 1;
-       denominator = denominator + 1;
-       number.textContent = numerator + "/" + denominator; 
+        numerator = numerator + 1;
+        denominator = denominator + 1;
+        number.textContent = numerator + "/" + denominator;
     });
 
-    counterReset.addEventListener("click", function() {
+    counterReset.addEventListener("click", function () {
         numerator = denominator = 0;
         number.textContent = "null";
     });
-}
 
     document.addEventListener("keyup", (event) => {
-    const keyName = event.key;
+        const keyName = event.key;
 
-    console.log(keyName + "is pressed.");
-    if (keyName == "ArrowRight")
-    {
-        denominator = denominator + 1;
-        number.textContent = numerator + "/" + denominator;
-    }
-});
+        // console.log(keyName + "is pressed.");
+        if (keyName == "ArrowRight") {
+            denominator = denominator + 1;
+            number.textContent = numerator + "/" + denominator;
+        }
+    });
+}
 
 // Sets up the stopwatch functionality for the app
 function setupStopwatch() {
@@ -41,39 +40,39 @@ function setupStopwatch() {
     var stopTime = 0;
     var intervalID = 0;
 
-    startStop.addEventListener("click", function() {
-       if (intervalID) {
-        // Keep track of the app stop time in case we restart the clock
-        stopTime = Date.now();
-        
-        // Clear the interval that updates the clock
-        clearInterval(intervalID);
-        intervalID = 0;
+    startStop.addEventListener("click", function () {
+        if (intervalID) {
+            // Keep track of the app stop time in case we restart the clock
+            stopTime = Date.now();
+
+            // Clear the interval that updates the clock
+            clearInterval(intervalID);
+            intervalID = 0;
+
+            // Update the button text
+            startStop.textContent = "Start";
+            return;
+        }
+
+        // If we're restarting the clock, account fo the paused time
+        if (startTime > 0) {
+            var pauseTime = Date.now() - stopTime;
+            startTime = startTime + pauseTime;
+        } else {
+            startTime = Date.now();
+        }
+
+        // Set an interval to update the clock
+        intervalID = setInterval(() => {
+            var elapsedTime = Date.now() - startTime;
+            clock.textContent = formatTime(elapsedTime);
+        }, 100);
 
         // Update the button text
-        startStop.textContent = "Start";
-        return;
-       }
-
-       // If we're restarting the clock, account fo the paused time
-       if (startTime > 0) {
-        var pauseTime = Date.now() - stopTime;
-        startTime = startTime + pauseTime;
-       } else {
-        startTime = Date.now();
-       }
-
-       // Set an interval to update the clock
-       intervalID = setInterval(() => {
-        var elapsedTime = Date.now() - startTime;
-        clock.textContent = formatTime(elapsedTime);
-       }, 100);
-
-       // Update the button text
-       startStop.textContent = "Stop";
+        startStop.textContent = "Stop";
     });
 
-    reset.addEventListener("click", function() {
+    reset.addEventListener("click", function () {
         // If the timer is currently running, just reset the start time to now
         if (intervalID) {
             stopTime = Date.now();
