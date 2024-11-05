@@ -8,8 +8,9 @@ p {
 
 #beginButton, #number2 {
     /* margin-left: auto; */
-    float: right;
+    float: right; /* turn element to relative right*/
     margin-right: 25%;
+    /* font-size: 16px; */
 }
 
 #resetButton, #number1 {
@@ -17,8 +18,11 @@ p {
 }
 
 button {
-    font-size: 30px;
-    
+    font-size: 25px;
+    height: 80px;
+    width: 80px;
+    border-radius: 100px; /* turn button into circle shape */
+    /* border-radius: 25% 25%; */
 }
 
 h1 {
