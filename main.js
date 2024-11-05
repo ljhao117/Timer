@@ -1,4 +1,5 @@
 window.addEventListener("DOMContentLoaded", setupStopwatch);
+window.addEventListener("DOMContentLoaded", numberClicker);
 
 var numerator = 0, denominator = 0;
 var counterError = document.getElementById("number1");
