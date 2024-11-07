@@ -41,6 +41,7 @@ function setupStopwatch() {
     var intervalID = 0;
 
     startStop.addEventListener("click", function () {
+        // pause the clock
         if (intervalID) {
             // Keep track of the app stop time in case we restart the clock
             stopTime = Date.now();
@@ -51,6 +52,7 @@ function setupStopwatch() {
 
             // Update the button text
             startStop.textContent = "Start";
+            reset.textContent = "reset";
             return;
         }
 
@@ -70,11 +72,18 @@ function setupStopwatch() {
 
         // Update the button text
         startStop.textContent = "Stop";
+        reset.textContent = "lap";
     });
 
     reset.addEventListener("click", function () {
         // If the timer is currently running, just reset the start time to now
-        if (intervalID) {
+        if (intervalID && reset.textContent === "lap") {
+            var i = document.createElement("p");
+            var text = document.createTextNode(clock.textContent);
+            i.appendChild(text);
+            document.getElementById('recordList').appendChild(i);
+            return;
+        } else {
             stopTime = Date.now();
             clearInterval(intervalID);
             intervalID = 0;
@@ -83,6 +92,7 @@ function setupStopwatch() {
         startTime = intervalID ? Date.now() : 0;
         stopTime = 0;
         clock.textContent = "00:00.00";
+        // document.getElementById('recoreList')
     });
 
     // Helper function that takes a UTC timestamp and returns a formatted time string
