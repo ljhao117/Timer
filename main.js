@@ -51,7 +51,7 @@ function setupStopwatch() {
             intervalID = 0;
 
             // Update the button text
-            startStop.textContent = "Start";
+            startStop.textContent = "start";
             reset.textContent = "reset";
             return;
         }
@@ -87,12 +87,17 @@ function setupStopwatch() {
             stopTime = Date.now();
             clearInterval(intervalID);
             intervalID = 0;
-            startStop.textContent = "Start";
+            startStop.textContent = "start";
         }
         startTime = intervalID ? Date.now() : 0;
         stopTime = 0;
         clock.textContent = "00:00.00";
-        // document.getElementById('recoreList')
+        
+        // get lap element and delete all of them
+        i = document.getElementById('recordList');
+        while (i.hasChildNodes()) {
+            i.removeChild(i.firstElementChild);            
+        }
     });
 
     // Helper function that takes a UTC timestamp and returns a formatted time string

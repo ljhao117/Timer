@@ -17,6 +17,12 @@ p {
     margin-left: 25%;   
 }
 
+#recordList {
+    flex-direction: column-reverse;
+    display: flex;
+    
+}
+
 button {
     font-size: 25px;
     height: 80px;
