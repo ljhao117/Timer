@@ -92,18 +92,22 @@ function setupStopwatch() {
         startTime = intervalID ? Date.now() : 0;
         stopTime = 0;
         clock.textContent = "00:00.00";
-        
+
         // get lap element and delete all of them
         i = document.getElementById('recordList');
         while (i.hasChildNodes()) {
-            i.removeChild(i.firstElementChild);            
+            i.removeChild(i.firstElementChild);
         }
     });
 
     // Helper function that takes a UTC timestamp and returns a formatted time string
     function formatTime(timestamp) {
         var d = new Date(timestamp);
-        console.log("Date():" + d);
+        var i = new Date('Thu Jan 01 1970 08:00:00');
+        console.log(d);
+        console.log("days: " + d.getDate() + ", hours: " + d.getHours());
+        // console.log("hours:" + i.getHours());
+        // console.log("day:" + i.getDate());
         var minutes = d.getMinutes();
 
         if (minutes < 10) {
@@ -114,18 +118,35 @@ function setupStopwatch() {
         if (seconds < 10) {
             seconds = "0" + seconds;
         }
-
-        var hours = d.getHours();
-        if (hours < 10) {
-            hours = "0" + hours;
-        }
-        console.log(hours);
-
+        
         var millisec = d.getMilliseconds();
-        if ((hours - 8) == 0) {
-            return minutes + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+        
+        var hours = d.getHours();
+        var days = d.getDate();
+        /*
+        1.day==1 and 8 < hours < 23
+        2.day > 2 and 0 < hours < 8
+        3.day >2 and hours > 8
+        */
+
+        // day == 1 and hours < 23
+        if (days == 1) {
+            if (hours < 10) {
+                hours = "0" + hours;
+            } 
+            
+            if ((hours - 8) == 0) {
+                return minutes + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+            }
+
+            return (hours - 8) + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
         }
 
-        return (hours - 8) + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+        // day > 2 and 0 < hours < 8  Thu Jan 01 1970 08:00:00
+        if (days > 1 && hours <= 8) {
+            return (hours - 8) + (days - 1) * 24 + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+        }
+
+        return (days - 1) * 24 + (i.getHours - hours) + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
     }
 }
