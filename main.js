@@ -139,14 +139,14 @@ function setupStopwatch() {
                 return minutes + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
             }
 
-            return (hours - 8) + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+            return (hours - 8) + ":" + minutes + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
         }
 
         // day > 2 and 0 < hours < 8  Thu Jan 01 1970 08:00:00
         if (days > 1 && hours <= 8) {
-            return (hours - 8) + (days - 1) * 24 + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+            return (hours - 8) + (days - 1) * 24 + ":" + minutes + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
         }
 
-        return (days - 1) * 24 + (i.getHours - hours) + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
+        return (days - 1) * 24 + (i.getHours - hours) + ":" + minutes + ":" + seconds + "." + (millisec + Array(2).join(0)).slice(0, 2);
     }
 }
